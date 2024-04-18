@@ -14,9 +14,17 @@
 .nav-items > ul > li{
     padding: 20px;
 }
+.nav-link {
+    text-decoration: none;
+    color: black;
+}
 .search{
     padding: 10px;
     display: flex;
+}
+.card-link {
+    text-decoration: none;
+    color: black;
 }
 .res-card{
     width: 300px;
@@ -69,3 +77,41 @@
 .filters{
     padding: 0 20px;
 }
+.restaurant-menu{
+    margin: 2% 20%;
+}
+.go-back{
+    margin-bottom: 10px;
+}
+.go-back > button {
+    font-size: 25px;
+}
+.menu-header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.opened {
+    color: green;
+}
+.closed {
+    color: red;
+}
+.menu-image{
+    width: 22%;
+    /* height: auto; */
+    border-radius: 10px;
+}
+.table{
+    width: 100%;
+}
+.table > td, th, tr {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+/* .table > li > td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px; */
+/* } */
