@@ -110,8 +110,10 @@
     text-align: left;
     padding: 8px;
   }
-/* .table > li > td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px; */
-/* } */
+.user-card {
+    display: inline-block;
+    width: 600px;
+    margin: 5%;
+    border: 1px solid black;
+    padding: 1%;
+}
