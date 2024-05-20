@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer.js";
 import RestaurantCard from "./RestaurantCard";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
@@ -45,6 +46,10 @@ const Body = () => {
       setFilteredResData(resData);
     }
   };
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus === false) {
+    return <h1>Looks like you are offline!! Please check your internet connection.</h1>
+  }
   return (
     <div className="body">
       <div className="search">
