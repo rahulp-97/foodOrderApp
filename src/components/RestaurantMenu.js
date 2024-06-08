@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Shimmer from "./Shimmer.js";
-import { restaurantImageUrl } from "../utils/constants.js";
 import useRestaurantMenu from "../utils/useRestaurantMenu.js";
+import RestaurantCategory from "./RestaurantCategory.js";
 
 const RestaurantMenu = () => {
   const navigate = useNavigate();
@@ -18,22 +18,30 @@ const RestaurantMenu = () => {
   const menuItems = resDetail?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card.itemCards;
   // console.log('menu', menuItems);
   // console.log(resDetail?.cards[2]?.card?.card?.info);
+  const categories = resDetail?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => {
+    return c?.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  });
   return(
     <div className="restaurant-menu">
       <div className="go-back" >
-        <button onClick={()=>navigate(-1)}>Go back</button>
+        <button onClick={()=>navigate(-1)} className="mt-1 mx-6 absolute bg-black hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
+          Go back
+        </button>
       </div>
-      <div className="menu-header">
+      <div className="text-center mt-1">
         <div>
-        <h1>{name}</h1>
+        <h1 className="font-bold text-2xl">{name}</h1>
         <h3>{avgRating}⭐</h3>
         <span>{totalRatingsString}</span>
         <h4>availability: <span className={availability?.opened ? 'opened' : 'closed'}>{availability.opened ? 'Open' : 'closed'}</span></h4>
         <p>{areaName}, {city}</p>
         </div>
-        <img className="menu-image" src={`${restaurantImageUrl}/${cloudinaryImageId}`} />
+        <div>
+          {categories.map((category) => <RestaurantCategory data={category?.card?.card}/>)}
+        </div>
+        {/* <img className="menu-image" src={`${restaurantImageUrl}/${cloudinaryImageId}`} /> */}
       </div>
-      <p>Cuisines: {cuisines.join(", ")} - {costForTwoMessage}</p>
+      {/* <p>Cuisines: {cuisines.join(", ")} - {costForTwoMessage}</p>
       <h1>Menu</h1>
       <table className="table">
         <thead>
@@ -52,7 +60,7 @@ const RestaurantMenu = () => {
           </tr>
          })}
          </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };

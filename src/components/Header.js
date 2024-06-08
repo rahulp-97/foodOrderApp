@@ -6,7 +6,7 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const onlineStatus = useOnlineStatus();
     return (
-            <div className="flex justify-between bg-pink-100 shadow-lg m-2">
+            <div className="flex justify-between bg-black text-white text-xl shadow-lg m-2">
             <div className="logo-container">
                 <img className="w-56" src={LOGO} />
             </div>

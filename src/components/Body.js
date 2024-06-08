@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer.js";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { WithRatingLabel } from "./RestaurantCard";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Body = () => {
@@ -9,6 +9,8 @@ const Body = () => {
   const [filteredResData, setFilteredResData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [hasResData, setHasResData] = useState(true);
+
+  const RestaurantCardWithLabel = WithRatingLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -59,19 +61,19 @@ const Body = () => {
           value={searchInput}
           onChange={handleSearchInput}
         />
-        <button onClick={handleSearchClick} className="mx-2 px-3 py-1 bg-green-100">search</button>
-        <button className="mx-2 px-3 py-1 bg-green-100">filter</button>
-        <button className="mx-2 px-3 py-1 bg-green-100">all</button>
+        <button onClick={handleSearchClick} class="mx-2 bg-black hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
+          Search
+        </button>
       </div>
       <div className="">
         {filteredResData.length !== 0 && hasResData ? (
           <ul className="flex flex-wrap lg:mx-5">
             {filteredResData?.map((restaurant) => {
-              const {id} = restaurant.info;
+              const {id, avgRating} = restaurant.info;
               return (
                 <li key={id} className="m-3">
                   <Link className="card-link" to={`/restaurants/${id}`}>
-                    <RestaurantCard restaurantDetail={restaurant.info} />
+                    {(avgRating > 4.3) ? <RestaurantCardWithLabel restaurantDetail={restaurant?.info} /> : <RestaurantCard restaurantDetail={restaurant?.info} />}
                   </Link>
                 </li>
               );
