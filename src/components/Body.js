@@ -61,7 +61,7 @@ const Body = () => {
           value={searchInput}
           onChange={handleSearchInput}
         />
-        <button onClick={handleSearchClick} class="mx-2 bg-black hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
+        <button onClick={handleSearchClick} className="mx-2 bg-black hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
           Search
         </button>
       </div>

@@ -7,6 +7,7 @@ import RestaurantCategory from "./RestaurantCategory.js";
 const RestaurantMenu = () => {
   const navigate = useNavigate();
   const { resId } = useParams();
+  const [showIndex, setShowIndex] =  useState(1);
 
   const resDetail = useRestaurantMenu(resId);
   if (resDetail === null){
@@ -37,7 +38,13 @@ const RestaurantMenu = () => {
         <p>{areaName}, {city}</p>
         </div>
         <div>
-          {categories.map((category) => <RestaurantCategory data={category?.card?.card}/>)}
+          {categories.map((category, index) => (
+            <RestaurantCategory 
+              data={category?.card?.card}
+              showItems={index === showIndex ? true : false}
+              setShowIndex={()=> setShowIndex(index)}
+            />
+          ))}
         </div>
         {/* <img className="menu-image" src={`${restaurantImageUrl}/${cloudinaryImageId}`} /> */}
       </div>

@@ -13,7 +13,7 @@ const ItemList = ({items}) => {
                             <p className="text-sm">⭐{rating} ({ratingCount})</p>
                             <p className="text-xs">{description}</p>
                         </div>
-                        <div className="py-2 pl-4  flex justify-end">
+                        <div className="py-2 pl-4 flex justify-end">
                         <img 
                         src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${imageId}`} 
                         className="w-[120px] h-[120px] rounded-lg"
