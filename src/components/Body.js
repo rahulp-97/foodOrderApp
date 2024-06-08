@@ -51,27 +51,25 @@ const Body = () => {
     return <h1>Looks like you are offline!! Please check your internet connection.</h1>
   }
   return (
-    <div className="body">
-      <div className="search">
+    <div>
+      <div className="m-4 p-4">
         <input
           type="text"
-          className="search-box"
+          className="border border-solid border-black"
           value={searchInput}
           onChange={handleSearchInput}
         />
-        <button onClick={handleSearchClick}>search</button>
-        <div className="filters">
-          <button>filter</button>
-          <button>all</button>
-        </div>
+        <button onClick={handleSearchClick} className="mx-2 px-3 py-1 bg-green-100">search</button>
+        <button className="mx-2 px-3 py-1 bg-green-100">filter</button>
+        <button className="mx-2 px-3 py-1 bg-green-100">all</button>
       </div>
-      <div className="res-container">
+      <div className="">
         {filteredResData.length !== 0 && hasResData ? (
-          <ul className="res-cards-list">
+          <ul className="flex flex-wrap lg:mx-5">
             {filteredResData?.map((restaurant) => {
               const {id} = restaurant.info;
               return (
-                <li key={id}>
+                <li key={id} className="m-3">
                   <Link className="card-link" to={`/restaurants/${id}`}>
                     <RestaurantCard restaurantDetail={restaurant.info} />
                   </Link>
