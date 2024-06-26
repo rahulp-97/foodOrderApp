@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Shimmer from "./Shimmer.js";
 import useRestaurantMenu from "../utils/useRestaurantMenu.js";
@@ -7,7 +7,7 @@ import RestaurantCategory from "./RestaurantCategory.js";
 const RestaurantMenu = () => {
   const navigate = useNavigate();
   const { resId } = useParams();
-  const [showIndex, setShowIndex] =  useState(1);
+  const [showIndex, setShowIndex] =  useState(null);
 
   const resDetail = useRestaurantMenu(resId);
   if (resDetail === null){

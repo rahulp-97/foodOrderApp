@@ -2,8 +2,10 @@ import { useState } from "react";
 import ItemList from "./ItemList";
 
 const RestaurantCategory = ({data, showItems, setShowIndex}) => {
+    const [isexpanded, setIsExpanded] = useState(false);
     const handleClick = () => {
         setShowIndex();
+        setIsExpanded(!isexpanded);
     };
   return (
     <div>
@@ -12,7 +14,7 @@ const RestaurantCategory = ({data, showItems, setShowIndex}) => {
                 <span className="font-bold text-lg">{data?.title} ({data?.itemCards?.length})</span>
                 <span>🔽</span>
             </div>
-            {showItems && <ItemList items={data?.itemCards}/>}
+            {showItems && isexpanded && <ItemList items={data?.itemCards}/>}
         </div>
     </div>
   )
