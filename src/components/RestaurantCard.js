@@ -14,6 +14,7 @@ const RestaurantCard = (props) => {
     )
 };
 
+// Higher Order Component (HOC)
 export const WithRatingLabel = (RestaurantCard) => {
     return (props) => {
         return (

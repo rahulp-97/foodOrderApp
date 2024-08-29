@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer.js";
 import RestaurantCard, { WithRatingLabel } from "./RestaurantCard";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import {UserContext} from "../utils/UserContext.js";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
   const [filteredResData, setFilteredResData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [hasResData, setHasResData] = useState(true);
+  const {loggedInUser, setUsername} = useContext(UserContext);
 
   const RestaurantCardWithLabel = WithRatingLabel(RestaurantCard);
 
@@ -48,9 +50,17 @@ const Body = () => {
       setFilteredResData(resData);
     }
   };
+  const handleUsernameInput = (e) => {
+    e?.stopPropagation();
+    setUsername(e?.target?.value);
+  };
   const onlineStatus = useOnlineStatus();
-  if(onlineStatus === false) {
-    return <h1>Looks like you are offline!! Please check your internet connection.</h1>
+  if (onlineStatus === false) {
+    return (
+      <h1>
+        Looks like you are offline!! Please check your internet connection.
+      </h1>
+    );
   }
   return (
     <div>
@@ -61,19 +71,37 @@ const Body = () => {
           value={searchInput}
           onChange={handleSearchInput}
         />
-        <button onClick={handleSearchClick} className="mx-2 bg-black hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
+        <button
+          onClick={handleSearchClick}
+          className="mx-2 bg-black hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
+        >
           Search
         </button>
+        <span className="mx-4">
+          <label>username: </label>
+          <input
+            type="text"
+            className="border border-solid border-black"
+            value={loggedInUser}
+            onChange={handleUsernameInput}
+            />
+        </span>
       </div>
       <div className="">
         {filteredResData.length !== 0 && hasResData ? (
           <ul className="flex flex-wrap lg:mx-5">
             {filteredResData?.map((restaurant) => {
-              const {id, avgRating} = restaurant.info;
+              const { id, avgRating } = restaurant.info;
               return (
                 <li key={id} className="m-3">
                   <Link className="card-link" to={`/restaurants/${id}`}>
-                    {(avgRating > 4.3) ? <RestaurantCardWithLabel restaurantDetail={restaurant?.info} /> : <RestaurantCard restaurantDetail={restaurant?.info} />}
+                    {avgRating > 4.3 ? (
+                      <RestaurantCardWithLabel
+                        restaurantDetail={restaurant?.info}
+                      />
+                    ) : (
+                      <RestaurantCard restaurantDetail={restaurant?.info} />
+                    )}
                   </Link>
                 </li>
               );

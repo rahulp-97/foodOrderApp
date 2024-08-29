@@ -37,6 +37,7 @@ const RestaurantMenu = () => {
         <h4>availability: <span className={availability?.opened ? 'opened' : 'closed'}>{availability.opened ? 'Open' : 'closed'}</span></h4>
         <p>{areaName}, {city}</p>
         </div>
+        {/* controlled Component */}
         <div>
           {categories.map((category, index) => (
             <RestaurantCategory 
