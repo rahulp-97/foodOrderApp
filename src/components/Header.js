@@ -3,11 +3,13 @@ import {LOGO} from '../utils/constants';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import {UserContext} from '../utils/UserContext';
+import {useSelector} from "react-redux";
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const {loggedInUser} = useContext(UserContext);
     const onlineStatus = useOnlineStatus();
+    const cartItems = useSelector((store) => store?.cart?.items);
     return (
             <div className="flex justify-between bg-black text-white text-xl shadow-lg m-2">
             <div className="logo-container">
@@ -30,8 +32,8 @@ const Header = () => {
                     <li className="px-4">
                         <Link className='nav-link' to='/grocery'>Grocery</Link>
                     </li>
-                    <li className="px-4">
-                        Cart
+                    <li className="px-4 font-bold cursor-pointer">
+                    <Link className='nav-link' to='/cart'>Cart {`(${cartItems?.length} items)`}</Link>
                     </li>
                     <li className="px-4">
                         <button className="login-btn" onClick={()=>setIsLoggedIn(!isLoggedIn)}>
