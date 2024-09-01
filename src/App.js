@@ -18,7 +18,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   useEffect(() => {
     //make an api call to fetch username.
-    setUsername("Rahul Prajapati");
+    setUsername("admin user");
   }, []);
   return (
     <Provider store={appStore}>
